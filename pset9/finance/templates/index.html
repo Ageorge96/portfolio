@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <h1>
+        Welcome {{ user.username }}, here is your portfolio.
+    </h1>
+    <table class="table">
+            <thead>
+                <tr>
+                    <th>Company</th>
+                    <th>Symbol</th>
+                    <th>Stock price</th>
+                    <th>Shares</th>
+                    <th>Share value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in portfolio %}
+                    <tr>
+                        <td>{{ stock.name }}</td>
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.price | usd}}</td>
+                        <td>{{ stock.shares }}</td>
+                        <td>{{ stock.value | usd}}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ user.username }}'s balance</td>
+                    <td>{{ user.cash | usd }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{ user.username }}'s total</td>
+                    <td>{{ total | usd }}</td>
+                </tr>
+            </tbody>
+    </table>
+
+    <form action="/index" method="post">
+        <select id="action" name="action">
+            <option disabled selected>Buy/Sell</option>
+            <option>Buy</option>
+            <option>Sell</option>
+        </select>
+        <select id="symbol" name="symbol">
+            <option disabled selected>Symbol</option>
+            {% for symbol in symbols %}
+            <option>{{ symbol.symbol }}</option>
+            {% endfor %}
+        </select>
+        <input class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="Share for exchange?">
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+
+{% endblock %}

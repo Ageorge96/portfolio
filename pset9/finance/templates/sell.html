@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <div class="mb-3">
+            <select id="symbol" name="symbol">
+                <option disabled selected>Symbol</option>
+                {% for symbol in symbols %}
+                <option>{{ symbol.symbol }}</option>
+                {% endfor %}
+            </select>
+            <!--autofocus class="form-control mx-auto w-auto" id="symbol" name="symbol" placeholder="Whose shares are you selling?">-->
+        </div>
+        <!--display current selling price-->
+        <!-- class="mb-3">Current sale price for ["symbol"]["price"]|usd -->
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" id="shares" name="shares" placeholder="How many shares would you like to sell?" type="hidden">
+        </div>
+        <button class="btn btn-primary" type="submit">Sell</button>
+    </form>
+{% endblock %}
