@@ -1,0 +1,81 @@
+{% extends "layout.html"%}
+
+{% block title %}
+    Wishlist
+{% endblock %}
+
+{% block main %}
+
+    <script src="static/script.js"></script>
+
+    <span onclick="openNav('add-wish')" class="mb-3 btn btn-primary" id="add">Add book</span>
+
+
+    <div class="sidenav" id="add-wish">
+        <a href="javascript:void(0)" class="closebtn navbtn" onclick="closeNav('add-wish')">&times;</a>
+        <form action="/wishlist/add" method="post">
+
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto sidenav-textbox" id="title" name="title" placeholder="Title" required type="text">
+            </div>
+
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto sidenav-textbox" id="author" name="author" placeholder="Author" required type="text">
+            </div>
+
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto sidenav-textbox" id="market" name="market" placeholder="What is the market price?" required type="number" min="0.1" step="0.01">
+            </div>
+
+            <!--<select class="dropdown mb-3" id="genre" name="genre">
+                <option disabled>Select the genre/s</option>
+                <option >Fantasy</option>
+                <option >Sci-fi</option>
+                <option >Mystery</option>
+                <option >Crime</option>
+                <option >Romance</option>
+                <option>Action/Adventure</option>
+                <option >Military</option>
+                <option >Horror</option>
+                <option >Comic</option>
+                <option >Graphic Novel</option>
+                <option >Historical</option>
+                <option >Literary Fiction</option>
+                <option >Thriller</option>
+                <option >Classic</option>
+                <option >Biography/Autobiography</option>
+                <option >Non-Fiction</option>
+            </select>-->
+
+            <button class="mb-3 btn btn-primary" type="submit">Add book</button>
+        </form>
+    </div>
+
+    <table class="table table-dark table-striped" id="wishlist">
+        <thead>
+            <tr>
+                <td>Title</td>
+                <td>Author</td>
+                <td>Market price</td>
+                <td>Waterstone price</td>
+                <td>Purchased</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in wishlist %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.market }}</td>
+                    <td>{{ book.waterstone }}</td>
+                    <form action="/wishlist/purchased" id="purchase_form" method="post">
+                        <td><input type="checkbox" id="purchase" name="purchase"></td>
+                    </form>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <button class="mb-3 btn btn-primary" form="purchase_form" type="submit" >Clear purchased</button>
+
+{% endblock %}

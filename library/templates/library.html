@@ -1,0 +1,203 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Library
+{% endblock %}
+
+{% block main %}
+
+    <script src="static/script.js"></script>
+
+    <script type="text/javascript">
+
+
+        /* enable data editing*/
+        function openEdit(nav) {
+            var x = document.getElementById(nav);
+
+            // hide buttons when sidebar is open
+            document.getElementById('add').style.visibility = "hidden";
+            document.getElementById('edit').style.visibility = "hidden";
+            document.getElementById('remove').style.visibility = "hidden";
+
+            /*const edit_mode = document.getElementsByTagName('span');
+
+            for (let i = 0; i < edit_mode.length; i++)
+            {
+                edit_mode[i].style.display = "none";
+            }*/
+
+
+
+            /* allow user to make changes to books */
+            /* get table element */
+            let table = document.getElementById("library");
+
+            /*alert(table.rows[1].cells[5]);*/
+
+
+            /* iterate through table row, ignoring table header */
+            for (let i = 1, j = table.rows.length; i <= j; i++) {
+                const input =
+                alert(table.row[i].cell[5].innerhtml)
+            } */
+
+            if (x.style.display === "none") {
+
+                x.style.display = "block";
+
+                document.getElementByTagName('span').disable = true;
+
+            }
+
+        }
+
+        function save() {
+
+            /* get number of rows in table */
+            var row = document.getElementsByTagName('tr');
+            var row_len = row.length - 1;
+            alert(row[1][3].innerhtml);
+
+            /* loop through each row of the library */
+            for (let i = 1; i <= row_len; i++) {
+
+            }
+
+
+            /* get the bookmark and status */
+
+            /* replace bookmark and stutus */
+
+
+            /* remove save and cancel buttons
+            document.getElementById('edit-nav').style.display = "none";
+
+            document.getElementById('add').style.visibility = "visible";
+            document.getElementById('edit').style.visibility = "visible";
+            document.getElementById('remove').style.visibility = "visible";*/
+        }
+
+
+
+    </script>
+    <!--On button click open add book sidebar-->
+    <span onclick="openNav('add-nav')" class="mb-3 btn btn-primary" id="add">Add book</span>
+    <!--On button click make database editable-->
+    <span onclick="openEdit('edit-nav') " class="mb-3 btn btn-primary" id="edit">Edit book</span>
+    <!--On button click open remove book sidebar-->
+    <span onclick="openNav('remove-nav')" class="mb-3 btn btn-primary" id="remove">Remove book</span>
+
+    <div id="edit-nav" class="mb-3" style="display: none;">
+        <form action="/library/save" style="float: left;" method="post">
+            <button onclick="save()" class="btn btn-primary">Save changes</button>
+        </form>
+        <form action="/library/cancel" style="float: right;" method="post">
+            <button onclick="cancel()" class="btn btn-primary">Cancel changes</button>
+        </form>
+    </div>
+
+    <!--Library table-->
+    <table class="table table-dark table-striped" id="library">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Series</th>
+                <th>Genre</th>
+                <th>Pages</th>
+                <th>Status</th>
+                <th>Bookmark</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.series }}</td>
+                    <td>{{ book.genre }}</td>
+                    <td>{{ book.pages }}</td>
+                    <td>{{ book.status }}</td>
+                    <td>{{ book.bookmark }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="sidenav" id="add-nav">
+        <a href="javascript:void(0)" class="closebtn navbtn" onclick="closeNav('add-nav')">&times;</a>
+        <form action="/library/add" method="post">
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto sidenav-textbox" id="title" name="title" placeholder="Title" required>
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto sidenav-textbox" id="author" name="author" placeholder="Author" requried>
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto sidenav-textbox" id="series" name="series" placeholder="Series">
+            </div>
+            <!--creat dropdown box for genre-->
+            <div class="mb-3">
+            <label form="genre" style="color: white;">Select the genre/s</label>
+            <select multiple class="sidenav-textbox" id="genre" name="genre" required size="8">
+                <option value="Fantasy">Fantasy</option>
+                <option value="Sci-Fi">Sci-fi</option>
+                <option value="Mystery">Mystery</option>
+                <option value="Crime">Crime</option>
+                <option value="Rommance">Romance</option>
+                <option value="Young Adult">Young Adult</option>
+                <option value="Action">Action/Adventure</option>
+                <option value="Military">Military</option>
+                <option value="Horror">Horror</option>
+                <option value="Comic">Comic</option>
+                <option value="Graphic Novel">Graphic Novel</option>
+                <option value="Historical">Historical</option>
+                <option value="Literary Fiction">Literary Fiction</option>
+                <option value="Thriller">Thriller</option>
+                <option value="Classic">Classic</option>
+                <option value="Biography/Autobiography">Biography/Autobiography</option>
+                <option value="Non-Fiction">Non-Fiction</option>
+            </select>
+            </div>
+
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto sidenav-textbox" id="pages" name="pages" placeholder="Total pages">
+            </div>
+            <div class="mb-3">
+                <select class="sidenav-textbox" id="status" name="status" required>
+                    <option disabled selected>Status</option>
+                    <option>Ready to start</option>
+                    <option>In progress</option>
+                    <option>Finished</option>
+                    <option>Next</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <input class="form-control mx-auto w-auto sidenav-textbox" id="bookmark" name="bookmark" placeholder="bookmark">
+            </div>
+            <button class="btn btn-primary" type="submit">Add book</button>
+        </form>
+    </div>
+
+
+    <!--remove book sidenav menu-->
+    <div class="sidenav" id="remove-nav">
+        <form action="/library/remove" method="post">
+            <div class="mb-3">
+                <a href="javascript:void(0)" class="closebtn navbtn" onclick="closeNav('remove-nav')">&times;</a>
+                <label style="color: white;">Enter title you would like to remove.</label>
+                <input class="form-control mx-auto w-auto sidenav-textbox" list="books" id="title" name="title">
+                <datalist id="books">
+                    {% for book in books %}
+                        <option value="{{ book.title }}">
+                    {% endfor %}
+                </datalist>
+            </div>
+            <button class="btn btn-primary mb-3" type="submit">Remove book</button>
+        </form>
+    </div>
+
+
+
+{% endblock %}

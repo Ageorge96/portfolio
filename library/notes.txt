@@ -1,0 +1,26 @@
+Wishlist page
+add book list
+list headers; title, author market
+
+# shift focus
+work on api function but change prices to ratings
+work from good read api
+
+
+check functions, make it work for each item individually
+after checks the issue with the check boxes lies with the html form
+
+
+changing from amazon to waterstones for api
+add checkbox on the end, all checked boxes will be cleared on button press
+
+on hold
+fix edit nav (make the buttons side by side)
+
+On hold
+add edit book option
+    fix scrpit code to work as a loop instead of with id
+
+add book image to banner
+
+fix sidenav opacity issue(optional)

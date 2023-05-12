@@ -1,0 +1,57 @@
+.sidenav {
+    height: 100%; /* make sidebar 100% of the page's height */
+    width: 0;
+    position: fixed; /* keep sidenav in place */
+    z-index: 1; /* remain on top layer of page */
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 50px; /* shift content ?px from top */
+    transition: 0.5s; /* transition effect will take 0.5 */
+    text-decoration: none;
+}
+
+/*
+.sidnav a {
+    text-decoration: none;
+}*/
+
+
+/* side nav text box content */
+.sidenav-textbox {
+    background-color: black;
+    border-color: white;
+    border-style: double;
+    border-width: 5px;
+    color: white;
+}
+
+
+.sidenav .closebtn {
+    font-size: 36px;
+    margin-left: 50px;
+    position: absolute;
+    text-decoration: none;
+    top: 0;
+    right: 25px;
+
+}
+
+/* edit add book nav button */
+.navbtn {
+
+}
+
+.navbar-brand a:hover{
+    background-color: black;
+    font-size: 10px;
+}
+
+.nav-item {
+    font-size: 18px;
+}
+
+.nav-item a:hover {
+    background-color: #c3e6ef;
+}
